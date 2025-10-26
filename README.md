@@ -151,7 +151,7 @@ Set up alerting rules and email notifications for application performance issues
         </details>
         <br>
         
-      <details><summary><strong>PrometheusAlert NOK</strong></summary>
+      <details><summary><strong>PrometheusAlert NOK: CDR Error</strong></summary>
         If it does not work, then ensure your CDR version APIversion is the same as your cluster.<br>
         Verify if CDR are available in the cluster
         ```
@@ -167,7 +167,9 @@ Set up alerting rules and email notifications for application performance issues
         apiVersion: monitoring.coreos.com/v1beta1   # or v1alpha1 if that's what step 1 showed
         kind: AlertmanagerConfig
         ```
+        <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/19%20troubleshooting%20error%20CDR.PNG" width=800/> 
       </details>
+      
     ```bash
       apiVersion: monitoring.coreos.com/v1alpha1
       kind: AlertmanagerConfig
@@ -189,12 +191,13 @@ Set up alerting rules and email notifications for application performance issues
 
     
     ```
-  <img src="" width=800/>
+  <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/alertmanager_yaml.PNG" width=800/>
 
 15. Add the email receivers to the YAML file.
    <details><summary><strong>GMAIL APP PASSWORD</strong></summary>
       Ensure you have two-step authentication activate and the secret is using the APP password for the app.
   </details>
+  
   ```bash
    receivers:
         - name: 'email'
@@ -209,8 +212,6 @@ Set up alerting rules and email notifications for application performance issues
               key: password
   ```
 
-<img src="" width=800/>
-    
 16. Create a kubernetes secret to store email credentials.
     ```bash
       apiVersion: v1
@@ -227,17 +228,20 @@ Set up alerting rules and email notifications for application performance issues
     ```
     kubectl apply -f email-secret.yaml
     ```
-    <img src="" width=800/>
 
 19. Apply the alert-manager configurataton file
     ```
     kubectl apply -f alert-manager-config.yaml
     ```
-    <img src="" width=800/>
+    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/15%20alertmanagrer%20ocnfig.PNG" width=800/>
     
 20. Verify the email receiver configuration in the AlertManeger Web UI
 
-    <img src="" width=800/>
+    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/commit/36086b57dc7192fac732a7308f953c7d93c5e789" width=800/>
+    
+    Email content:
+    
+    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/21%20email%20received.png" width=800/>
 
 ## Testing Alert Manager
 20. Create a test pod to strees the system.
