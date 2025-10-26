@@ -68,6 +68,7 @@ Set up alerting rules and email notifications for application performance issues
     
  6. Test the High CPU rule
     ```bash
+    (100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)) > 50
     ```
     <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/5%20creating%20alarm%20if%20cpu%20usahe%20is%20higher%20than%2050%20percent.PNG" width=800/>
     
@@ -100,10 +101,11 @@ Set up alerting rules and email notifications for application performance issues
                   #runbook_url:	https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagerfailedreload
                   summary:	"CPU Load on host is over 50%"
     ```
-    <img src="" width=800/>
+    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/alertrules%20yaml%20file%20cpu.PNG" width=800/>
   
 8. Test the Crash Looping rule.
    ```bash
+   increase(kube_pod_container_status_restarts_total[5m]) > 5
    ```
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/9%20second%20alart.PNG" width=800/>
    
