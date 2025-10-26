@@ -120,38 +120,40 @@ Set up alerting rules and email notifications for application performance issues
     </details>
     <br>
     
-    <details><summary><strong>PrometheusAlert NOK</strong></summary>
-        If it does not work, then ensure your CDR version APIversion is the same as your cluster.
-        Verify if CDR are available in the cluster
-        ```
-        kubectl get crd alertmanagerconfigs.monitoring.coreos.com
-        ```
-        See which API versions the CRD serves (e.g., v1beta1 or v1alpha1)
-        ```
-         kubectl get crd alertmanagerconfigs.monitoring.coreos.com -o jsonpath='{.spec.versions[*].name}{"\n"}'
-       ```
+  <details><summary><strong>PrometheusAlert NOK</strong></summary>
+    If it does not work, then ensure your CDR version APIversion is the same as your cluster.<br>
+    Verify if CDR are available in the cluster
+    ```
+    kubectl get crd alertmanagerconfigs.monitoring.coreos.com
+    ```
     
-       If the CDR  version does not match the yaml, then update the YAML file accordingly.
-        ```
-        apiVersion: monitoring.coreos.com/v1beta1   # or v1alpha1 if that's what step 1 showed
-        kind: AlertmanagerConfig
-        ```
-    </details>
+    See which API versions the CRD serves (e.g., v1beta1 or v1alpha1)
+    ```
+    kubectl get crd alertmanagerconfigs.monitoring.coreos.com -o jsonpath='{.spec.versions[*].name}{"\n"}'
+    ```
+    If the CDR  version does not match the yaml, then update the YAML file accordingly.
+    ```
+    apiVersion: monitoring.coreos.com/v1beta1   # or v1alpha1 if that's what step 1 showed
+    kind: AlertmanagerConfig
+    ```
+  </details>
 
 9. Add the email receivers to the YAML file.
-    <details><summary><strong>GMAIL APP PASSWORD</strong></summary>
+   <details><summary><strong>GMAIL APP PASSWORD</strong></summary>
       Ensure you have two-step authentication activate and the secret is using the APP password for the app.
   </details>
 
 <img src="" width=800/>
     
 11. Create a kubernetes secret to store email credentials.
+    
 <img src="" width=800/>
-12. Apply the secret.
-```
-kubectl apply -f email-secret.yaml
 
-<img src="" width=800/>
+12. Apply the secret.
+    ```
+    kubectl apply -f email-secret.yaml
+    ```
+    <img src="" width=800/>
 
 13. Apply the alert-manager configurataton file
     ```
