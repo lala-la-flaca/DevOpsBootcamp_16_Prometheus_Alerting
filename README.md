@@ -48,7 +48,7 @@ Set up alerting rules and email notifications for application performance issues
    ```
    <img src="" width=800/>
    
-4. Access AlertManager Web UI.
+3. Access AlertManager Web UI.
    Use port forwarding to expose Alert Manager service locally.
    
    ```bash
@@ -56,37 +56,73 @@ Set up alerting rules and email notifications for application performance issues
    ```
    <img src="" width=800/>
    
-6. Access Grafana
+4. Access Grafana
    Use port forwarding to expose the Grafana service locally.
    ```bash
    kubectl port-forward -n monitoring service/monitoring-grafana 8080:80
    ```
    
  ## Create Prometheus Rules
- 1. Access Prometheus Alerts.
+ 5. Access Prometheus Alerts.
     Use port forwarding to expose the Prometheus service locally.
- 3. Test the High CPU rule
- 4. Create the alert-rules.yaml file using the previous expresion.
+
+    ```bash
+    ```
+    <img src="" width=800/>
+    
+ 6. Test the High CPU rule
+    ```bash
+    ```
+    <img src="" width=800/>
+    
+ 7. Create the alert-rules.yaml file using the previous expresion.
     <details><summary><strong>Prometheus Alert Rules K8 Component</strong></summary>
     For information about the [Prometheus Rule component Doc](https://docs.redhat.com/en/documentation/openshift_container_platform/4.13/html/monitoring_apis/prometheusrule-monitoring-coreos-com-v1)
   </details>
   ```bash
   ```
-2. Test the Crash Looping rule.
-3. Add the rule to the yaml file.
-3. Apply the alert-rules.yaml file to the EKS cluster.
-4. Verify that the PrometheusRules objects are availables in the cluster.
-5. Verify that the main rules block has been created in the Prometheus Web UI
-6. Add the CPU dashbaord using the same metric as the CPU High Load.
+  <img src="" width=800/>
+  
+8. Test the Crash Looping rule.
+   ```bash
+   ```
+   <img src="" width=800/>
+9. Add the rule to the yaml file.
+   
+   ```bash
+   ```
+   <img src="" width=800/>
+   
+10. Apply the alert-rules.yaml file to the EKS cluster.
+   ```bash
+   kubectl apply -f alert-rules.yaml
+   ```
+11. Verify that the PrometheusRules objects are availables in the cluster.
+   ```bash
+   kubectl get PrometheusRules -n monitoring
+   ```
+
+   <img src="" width=800/>
+   
+12. Verify that the main rules block has been created in the Prometheus Web UI.
+   
+   <img src="" width=800/>
+   
+13. Add the CPU dashbaord using the same metric as the CPU High Load.
+   <img src="" width=800/> 
 
 ## Create the Alert Manager Configuration
-7. Create a new yaml file called alert-manager configuration.
-   <details><summary><strong>Prometheus Alert Rules K8 Component</strong></summary>
-    For information about the [Alert Manager component Doc](https://docs.redhat.com/en/documentation/openshift_container_platform/4.13/html/monitoring_apis/alertmanagerconfig-monitoring-coreos-com-v1beta1)
+14. Create a new yaml file called alert-manager configuration.
+   <details><summary><strong>Prometheus Alert Rules K8 Component Doc</strong></summary>
+     [Alert Manager component Doc](https://docs.redhat.com/en/documentation/openshift_container_platform/4.13/html/monitoring_apis/alertmanagerconfig-monitoring-coreos-com-v1beta1)
+    </details>
+    
+    <details><summary><strong>Prometheus Alert Rules NOK</strong></summary>
     If it does not work,then ensure your CDR version APIversion is the same as your cluster.
     # Do we have the CRD at all?
-   ```
+    ```
     kubectl get crd alertmanagerconfigs.monitoring.coreos.com
+    ```
      
    # See which API versions the CRD serves (e.g., v1beta1 or v1alpha1)
    ```
@@ -97,21 +133,46 @@ Set up alerting rules and email notifications for application performance issues
    kind: AlertmanagerConfig
     
   </details>
-   
-9. Add the email receivers to the yaml file.
-     <details><summary><strong>GMAIL APP codet</strong></summary>
-    Ensure you have two-step authentication activate and the secret is using the APP password for the app.
+
+9. Add the email receivers to the YAML file.
+    <details><summary><strong>GMAIL APP PASSWORD</strong></summary>
+      Ensure you have two-step authentication activate and the secret is using the APP password for the app.
   </details>
+
+<img src="" width=800/>
     
 11. Create a kubernetes secret to store email credentials.
+<img src="" width=800/>
 12. Apply the secret.
-13. Apply the alert-manager configurataton file.
+```
+kubectl apply -f email-secret.yaml
+
+<img src="" width=800/>
+
+13. Apply the alert-manager configurataton file
+    ```
+    kubectl apply -f alert-manager.yaml
+    ```
+    <img src="" width=800/>
+    
 14. Verify the email receiver configuration in the AlertManeger Web UI
+
+    <img src="" width=800/>
 
 ## Testing Alert Manager
 15. Create a test pod to strees the system.
-16. Verify that the pods is running.
-17. Check your email and confirm that the High CPU alert was triggered and received.
+    ```bash
+    ```
+    <img src="" width=800/>
+    
+17. Verify that the pods is running.
+    ```
+    kubectl get pods
+    ```
+    <img src="" width=800/>
+    
+19. Check your email and confirm that the High CPU alert was triggered and received.
+    <img src="" width=800/>
 
 
    
