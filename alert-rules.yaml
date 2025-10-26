@@ -1,0 +1,32 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: main-rules
+  namespace: monitoring
+  labels:
+    app: kube-prometheus-stack
+    release: monitoring
+spec:
+    groups:
+      - name: main.rules
+        rules:
+        - alert: HostHighCPULoad
+          expr: (100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)) > 50
+          for: 2m
+          labels:
+            severity: warning
+            namespace: monitoring
+          annotations:
+            description: "CPU Load on {{ $labels.instance }} is over 50%\n Value = {{ $value}} "
+            #runbook_url:	https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagerfailedreload
+            summary:	"CPU Load on host is over 50%"
+        
+        - alert: KubernetesPodCrashLooping
+          expr: increase(kube_pod_container_status_restarts_total[5m]) > 5
+          for: 0m
+          labels:
+              severity: critical
+              namespace: monitoring
+          annotations:
+            description: "Pod {{ $labels.pod }} in namespace {{ $labels.namespace }} restarted = {{ $value}} times in 5m"
+            summary: "Kubernetes Pod CrashLooping"
