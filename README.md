@@ -148,23 +148,24 @@ Set up alerting rules and email notifications for application performance issues
 ## Create the Alert Manager Configuration
 
 14. Create a new yaml file called alert-manager configuration.
-       <details><summary><strong>Prometheus Alert Rules K8 Component Doc</strong></summary>
+
+    <details><summary><strong>Prometheus Alert Rules K8 Component Doc</strong></summary>
          [Alert Manager Doc](https://docs.redhat.com/en/documentation/openshift_container_platform/4.13/html/monitoring_apis/alertmanagerconfig-monitoring-coreos-com-v1beta1)
-        </details>
-        <br>
+    </details>
         
-      <details><summary><strong>PrometheusAlert NOK: CDR Error</strong></summary>
-        If it does not work, then ensure your CDR version APIversion is the same as your cluster.<br>
-        Verify if CDR are available in the cluster
+    <br>
+        
+    <details><summary><strong>PrometheusAlert NOK: CDR Error</strong></summary>
+      If it does not work, then ensure your CDR version APIversion is the same as your cluster.<br>
+        Verify if CDR are available in the cluster:
         ```
         kubectl get crd alertmanagerconfigs.monitoring.coreos.com
         ```
-        
-        See which API versions the CRD serves (e.g., v1beta1 or v1alpha1)
+        See which API versions the CRD serves (e.g., v1beta1 or v1alpha1):
         ```
         kubectl get crd alertmanagerconfigs.monitoring.coreos.com -o jsonpath='{.spec.versions[*].name}{"\n"}'
         ```
-        If the CDR  version does not match the yaml, then update the YAML file accordingly.
+        If the CDR  version does not match the yaml, then update the YAML file accordingly:
         ```
         apiVersion: monitoring.coreos.com/v1beta1   # or v1alpha1 if that's what step 1 showed
         kind: AlertmanagerConfig
@@ -196,25 +197,27 @@ Set up alerting rules and email notifications for application performance issues
   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/alertmanager_yaml.PNG" width=800/>
 
 15. Add the email receivers to the YAML file.
-   <details><summary><strong>GMAIL APP PASSWORD</strong></summary>
+    
+    <details><summary><strong>GMAIL APP PASSWORD</strong></summary>
       Ensure you have two-step authentication activate and the secret is using the APP password for the app.
-  </details>
-  
-  ```bash
-   receivers:
-        - name: 'email'
-          emailConfigs:
-          - to: 'your_email@gmail.com'
-            from: 'your_email@gmail.com'
-            smarthost: 'smtp.gmail.com:587'
-            authUsername: 'your_email@gmail.com'
-            authIdentity: 'your_email@gmail.com'
-            authPassword: 
-              name: gmail-auth
-              key: password
-  ```
+    </details>
+    
+    ```bash
+       receivers:
+            - name: 'email'
+              emailConfigs:
+              - to: 'your_email@gmail.com'
+                from: 'your_email@gmail.com'
+                smarthost: 'smtp.gmail.com:587'
+                authUsername: 'your_email@gmail.com'
+                authIdentity: 'your_email@gmail.com'
+                authPassword: 
+                  name: gmail-auth
+                  key: password
+    ```
 
 16. Create a kubernetes secret to store email credentials.
+
     ```bash
       apiVersion: v1
       kind: Secret
@@ -226,17 +229,17 @@ Set up alerting rules and email notifications for application performance issues
         password: your_password_base64_encoded
     ```
 
-18. Apply the secret.
+17. Apply the secret.
     ```
     kubectl apply -f email-secret.yaml
     ```
 
-19. Apply the alert-manager configurataton file
+18. Apply the alert-manager configurataton file
     ```
     kubectl apply -f alert-manager-config.yaml
     ```
     
-20. Verify the email receiver configuration in the AlertManeger Web UI
+19. Verify the email receiver configuration in the AlertManeger Web UI
     <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/15%20alertmanagrer%20ocnfig.PNG" width=800/>
 
 
