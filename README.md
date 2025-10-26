@@ -118,6 +118,7 @@ Set up alerting rules and email notifications for application performance issues
    <details><summary><strong>Prometheus Alert Rules K8 Component Doc</strong></summary>
      [Alert Manager Doc](https://docs.redhat.com/en/documentation/openshift_container_platform/4.13/html/monitoring_apis/alertmanagerconfig-monitoring-coreos-com-v1beta1)
     </details>
+    <br>
     
     <details><summary><strong>PrometheusAlert NOK</strong></summary>
         If it does not work, then ensure your CDR version APIversion is the same as your cluster.
@@ -135,7 +136,7 @@ Set up alerting rules and email notifications for application performance issues
         apiVersion: monitoring.coreos.com/v1beta1   # or v1alpha1 if that's what step 1 showed
         kind: AlertmanagerConfig
         ```
-  </details>
+    </details>
 
 9. Add the email receivers to the YAML file.
     <details><summary><strong>GMAIL APP PASSWORD</strong></summary>
