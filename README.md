@@ -128,21 +128,21 @@ Set up alerting rules and email notifications for application performance issues
    ```bash
    kubectl apply -f alert-rules.yaml
    ```
-  <img src="" wdith=800 />
+  <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/10%20applying%20urles.png" wdith=800 />
   
 11. Verify that the PrometheusRules objects are availables in the cluster.
    ```bash
    kubectl get PrometheusRules -n monitoring
    ```
 
-   <img src="" width=800/>
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/12%20rule%20just%20created.png" width=800/>
    
 12. Verify that the main rules block has been created in the Prometheus Web UI.
    
-   <img src="" width=800/>
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/13%20rules%20in%20prometheus%20alerts.png" width=800/>
    
 13. Add the CPU dashbaord using the same metric as the CPU High Load.
-   <img src="" width=800/> 
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/14%20grafana%20modifying%20dashboard.PNG" width=800/> 
 
 ## Create the Alert Manager Configuration
 14. Create a new yaml file called alert-manager configuration.
