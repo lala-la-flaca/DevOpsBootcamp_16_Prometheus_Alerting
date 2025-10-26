@@ -262,8 +262,7 @@ Set up alerting rules and email notifications for application performance issues
 23. Check your email and confirm that the High CPU alert was triggered and received:
 
     <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/commit/36086b57dc7192fac732a7308f953c7d93c5e789" width=800/>
-    
-    Email content:
+ 
     <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/21%20email%20received.png" width=800/>
 
 
