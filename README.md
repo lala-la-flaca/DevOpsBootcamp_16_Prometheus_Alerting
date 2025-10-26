@@ -138,46 +138,46 @@ Set up alerting rules and email notifications for application performance issues
     ```
   </details>
 
-9. Add the email receivers to the YAML file.
+15. Add the email receivers to the YAML file.
    <details><summary><strong>GMAIL APP PASSWORD</strong></summary>
       Ensure you have two-step authentication activate and the secret is using the APP password for the app.
   </details>
 
 <img src="" width=800/>
     
-11. Create a kubernetes secret to store email credentials.
+16. Create a kubernetes secret to store email credentials.
     
 <img src="" width=800/>
 
-12. Apply the secret.
+17. Apply the secret.
     ```
     kubectl apply -f email-secret.yaml
     ```
     <img src="" width=800/>
 
-13. Apply the alert-manager configurataton file
+18. Apply the alert-manager configurataton file
     ```
     kubectl apply -f alert-manager.yaml
     ```
     <img src="" width=800/>
     
-14. Verify the email receiver configuration in the AlertManeger Web UI
+19. Verify the email receiver configuration in the AlertManeger Web UI
 
     <img src="" width=800/>
 
 ## Testing Alert Manager
-15. Create a test pod to strees the system.
+20. Create a test pod to strees the system.
     ```bash
     ```
     <img src="" width=800/>
     
-17. Verify that the pods is running.
+21. Verify that the pods is running.
     ```
     kubectl get pods
     ```
     <img src="" width=800/>
     
-19. Check your email and confirm that the High CPU alert was triggered and received.
+22. Check your email and confirm that the High CPU alert was triggered and received.
     <img src="" width=800/>
 
 
