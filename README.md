@@ -65,16 +65,11 @@ Set up alerting rules and email notifications for application performance issues
    
  ## Create Prometheus Rules
  5. Access Prometheus Alerts.
-    Use port forwarding to expose the Prometheus service locally.
-
-    ```bash
-    ```
-    <img src="" width=800/>
     
  6. Test the High CPU rule
     ```bash
     ```
-    <img src="" width=800/>
+    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/5%20creating%20alarm%20if%20cpu%20usahe%20is%20higher%20than%2050%20percent.PNG" width=800/>
     
  7. Create the alert-rules.yaml file using the previous expresion.
     <details><summary><strong>Prometheus Alert Rules K8 Component</strong></summary>
@@ -82,6 +77,28 @@ Set up alerting rules and email notifications for application performance issues
     </details>
   
     ```bash
+      apiVersion: monitoring.coreos.com/v1
+      kind: PrometheusRule
+      metadata:
+        name: main-rules
+        namespace: monitoring
+        labels:
+          app: kube-prometheus-stack
+          release: monitoring
+      spec:
+          groups:
+            - name: main.rules
+              rules:
+              - alert: HostHighCPULoad
+                expr: (100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)) > 50
+                for: 2m
+                labels:
+                  severity: warning
+                  namespace: monitoring
+                annotations:
+                  description: "CPU Load on {{ $labels.instance }} is over 50%\n Value = {{ $value}} "
+                  #runbook_url:	https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagerfailedreload
+                  summary:	"CPU Load on host is over 50%"
     ```
     <img src="" width=800/>
   
@@ -93,6 +110,15 @@ Set up alerting rules and email notifications for application performance issues
 9. Add the rule to the yaml file.
    
    ```bash
+   - alert: KubernetesPodCrashLooping
+     expr: increase(kube_pod_container_status_restarts_total[5m]) > 5
+     for: 0m
+     labels:
+       severity: critical
+       namespace: monitoring
+     annotations:
+       description: "Pod {{ $labels.pod }} in namespace {{ $labels.namespace }} restarted = {{ $value}} times in 5m"
+       summary: "Kubernetes Pod CrashLooping"
    ```
    <img src="" width=800/>
    
@@ -100,6 +126,8 @@ Set up alerting rules and email notifications for application performance issues
    ```bash
    kubectl apply -f alert-rules.yaml
    ```
+  <img src="" wdith=800 />
+  
 11. Verify that the PrometheusRules objects are availables in the cluster.
    ```bash
    kubectl get PrometheusRules -n monitoring
