@@ -77,16 +77,18 @@ Set up alerting rules and email notifications for application performance issues
     
  7. Create the alert-rules.yaml file using the previous expresion.
     <details><summary><strong>Prometheus Alert Rules K8 Component</strong></summary>
-      [Prometheus Rule component Doc](https://docs.redhat.com/en/documentation/openshift_container_platform/4.13/html/monitoring_apis/prometheusrule-monitoring-coreos-com-v1)
+    [PrometheusRule Doc](https://docs.redhat.com/en/documentation/openshift_container_platform/4.13/html/monitoring_apis/prometheusrule-monitoring-coreos-com-v1)
     </details>
-  ```bash
-  ```
-  <img src="" width=800/>
+  
+    ```bash
+    ```
+    <img src="" width=800/>
   
 8. Test the Crash Looping rule.
    ```bash
    ```
    <img src="" width=800/>
+   
 9. Add the rule to the yaml file.
    
    ```bash
@@ -114,24 +116,25 @@ Set up alerting rules and email notifications for application performance issues
 ## Create the Alert Manager Configuration
 14. Create a new yaml file called alert-manager configuration.
    <details><summary><strong>Prometheus Alert Rules K8 Component Doc</strong></summary>
-     [Alert Manager component Doc](https://docs.redhat.com/en/documentation/openshift_container_platform/4.13/html/monitoring_apis/alertmanagerconfig-monitoring-coreos-com-v1beta1)
+     [Alert Manager Doc](https://docs.redhat.com/en/documentation/openshift_container_platform/4.13/html/monitoring_apis/alertmanagerconfig-monitoring-coreos-com-v1beta1)
     </details>
     
-    <details><summary><strong>Prometheus Alert Rules NOK</strong></summary>
-    If it does not work,then ensure your CDR version APIversion is the same as your cluster.
-    # Do we have the CRD at all?
-    ```
-    kubectl get crd alertmanagerconfigs.monitoring.coreos.com
-    ```
-     
-   # See which API versions the CRD serves (e.g., v1beta1 or v1alpha1)
-   ```
-   kubectl get crd alertmanagerconfigs.monitoring.coreos.com -o jsonpath='{.spec.versions[*].name}{"\n"}'
-
-   # Update APIVersion accordingly in the YAML file.
-   apiVersion: monitoring.coreos.com/v1beta1   # or v1alpha1 if that's what step 1 showed
-   kind: AlertmanagerConfig
+    <details><summary><strong>PrometheusAlert NOK</strong></summary>
+        If it does not work, then ensure your CDR version APIversion is the same as your cluster.
+        Verify if CDR are available in the cluster
+        ```
+        kubectl get crd alertmanagerconfigs.monitoring.coreos.com
+        ```
+        See which API versions the CRD serves (e.g., v1beta1 or v1alpha1)
+        ```
+         kubectl get crd alertmanagerconfigs.monitoring.coreos.com -o jsonpath='{.spec.versions[*].name}{"\n"}'
+       ```
     
+       If the CDR  version does not match the yaml, then update the YAML file accordingly.
+        ```
+        apiVersion: monitoring.coreos.com/v1beta1   # or v1alpha1 if that's what step 1 showed
+        kind: AlertmanagerConfig
+        ```
   </details>
 
 9. Add the email receivers to the YAML file.
