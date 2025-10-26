@@ -161,16 +161,17 @@ Set up alerting rules and email notifications for application performance issues
       
         ```
           kubectl get crd alertmanagerconfigs.monitoring.coreos.com
+          ```
        
           See which API versions the CRD serves (e.g., v1beta1 or v1alpha1):<br>
        ```     
           kubectl get crd alertmanagerconfigs.monitoring.coreos.com -o jsonpath='{.spec.versions[*].name}{"\n"}'
-        
+          ```
           If the CDR  version does not match the yaml, then update the YAML file accordingly:<br>
         ```         
           apiVersion: monitoring.coreos.com/v1beta1   # or v1alpha1 if that's what step 1 showed
           kind: AlertmanagerConfig
-       
+       ```
 
       <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/19%20troubleshooting%20error%20CDR.PNG" width=800/> 
     </details>
