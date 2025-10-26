@@ -144,7 +144,9 @@ Set up alerting rules and email notifications for application performance issues
 13. Add the CPU dashbaord using the same metric as the CPU High Load.
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/14%20grafana%20modifying%20dashboard.PNG" width=800/> 
 
+
 ## Create the Alert Manager Configuration
+
 14. Create a new yaml file called alert-manager configuration.
        <details><summary><strong>Prometheus Alert Rules K8 Component Doc</strong></summary>
          [Alert Manager Doc](https://docs.redhat.com/en/documentation/openshift_container_platform/4.13/html/monitoring_apis/alertmanagerconfig-monitoring-coreos-com-v1beta1)
@@ -233,15 +235,11 @@ Set up alerting rules and email notifications for application performance issues
     ```
     kubectl apply -f alert-manager-config.yaml
     ```
-    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/15%20alertmanagrer%20ocnfig.PNG" width=800/>
     
 20. Verify the email receiver configuration in the AlertManeger Web UI
+    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/15%20alertmanagrer%20ocnfig.PNG" width=800/>
 
-    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/commit/36086b57dc7192fac732a7308f953c7d93c5e789" width=800/>
-    
-    Email content:
-    
-    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/21%20email%20received.png" width=800/>
+
 
 ## Testing Alert Manager
 20. Create a test pod to strees the system.
@@ -256,7 +254,11 @@ Set up alerting rules and email notifications for application performance issues
     <img src="" width=800/>
     
 22. Check your email and confirm that the High CPU alert was triggered and received.
-    <img src="" width=800/>
+
+    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/commit/36086b57dc7192fac732a7308f953c7d93c5e789" width=800/>
+    
+    Email content:
+    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/21%20email%20received.png" width=800/>
 
 
    
