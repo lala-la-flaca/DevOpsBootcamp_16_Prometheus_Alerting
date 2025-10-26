@@ -38,7 +38,7 @@ Set up alerting rules and email notifications for application performance issues
    ```bash
    kubectl get services - monitoring
    ```
-   <img src="" width=800/>
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/a%20services.PNG" width=800/>
    
 2. Access Prometheus Web UI
    Use port forwarding to expose the Prometheus service locally.
@@ -46,7 +46,7 @@ Set up alerting rules and email notifications for application performance issues
    ```bash
    kubectl port-forward service/monitoring-kube-prometheus-prometheus 9090:9090  -n monitoring &
    ```
-   <img src="" width=800/>
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/2%20port%20forwarding%20promtheus.PNG" width=800/>
    
 3. Access AlertManager Web UI.
    Use port forwarding to expose Alert Manager service locally.
@@ -54,13 +54,14 @@ Set up alerting rules and email notifications for application performance issues
    ```bash
     kubectl port-forward service/monitoring-kube-prometheus-alertmanager -n monitoring 9093:9093 &
    ```
-   <img src="" width=800/>
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/c.PNG" width=800/>
    
 4. Access Grafana
    Use port forwarding to expose the Grafana service locally.
    ```bash
    kubectl port-forward -n monitoring service/monitoring-grafana 8080:80
    ```
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/grafana%20pf.PNG" width=800/>
    
  ## Create Prometheus Rules
  5. Access Prometheus Alerts.
