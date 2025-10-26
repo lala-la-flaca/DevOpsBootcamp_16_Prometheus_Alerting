@@ -77,8 +77,8 @@ Set up alerting rules and email notifications for application performance issues
     
  7. Create the alert-rules.yaml file using the previous expresion.
     <details><summary><strong>Prometheus Alert Rules K8 Component</strong></summary>
-    For information about the [Prometheus Rule component Doc](https://docs.redhat.com/en/documentation/openshift_container_platform/4.13/html/monitoring_apis/prometheusrule-monitoring-coreos-com-v1)
-  </details>
+      [Prometheus Rule component Doc](https://docs.redhat.com/en/documentation/openshift_container_platform/4.13/html/monitoring_apis/prometheusrule-monitoring-coreos-com-v1)
+    </details>
   ```bash
   ```
   <img src="" width=800/>
