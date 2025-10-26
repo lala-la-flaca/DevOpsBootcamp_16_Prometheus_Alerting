@@ -249,17 +249,17 @@ Set up alerting rules and email notifications for application performance issues
 ## Testing Alert Manager
 20. Create a test pod to stress the system.
     ```bash
-    kubectl run cpu-stress-test --image=containerstack/cpustress -- cpu 4 --timeout 30s --metrics-brief
+      kubectl run cpu-stress-test --image=containerstack/cpustress -- cpu 4 --timeout 30s --metrics-brief
     ```
     <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/commit/2ebb37754e3c5709c9de3b1b74ef43187fecf1b4" width=800/>
     
 21. Verify that the pods is running.
-    ```
-    kubectl get pods
+    ```bash
+      kubectl get pods
     ```
     <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/commit/2ebb37754e3c5709c9de3b1b74ef43187fecf1b4" width=800/>
     
-22. Check your email and confirm that the High CPU alert was triggered and received:
+23. Check your email and confirm that the High CPU alert was triggered and received:
 
     <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/commit/36086b57dc7192fac732a7308f953c7d93c5e789" width=800/>
     
