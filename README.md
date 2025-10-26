@@ -160,16 +160,17 @@ Set up alerting rules and email notifications for application performance issues
         Verify if CDR are available in the cluster:<br>
       
         ```
-        kubectl get crd alertmanagerconfigs.monitoring.coreos.com
-     
-        See which API versions the CRD serves (e.g., v1beta1 or v1alpha1):<br>
+          kubectl get crd alertmanagerconfigs.monitoring.coreos.com
+       ```
+          See which API versions the CRD serves (e.g., v1beta1 or v1alpha1):<br>
+       ```     
+          kubectl get crd alertmanagerconfigs.monitoring.coreos.com -o jsonpath='{.spec.versions[*].name}{"\n"}'
         ```
-        kubectl get crd alertmanagerconfigs.monitoring.coreos.com -o jsonpath='{.spec.versions[*].name}{"\n"}'
-      
-        If the CDR  version does not match the yaml, then update the YAML file accordingly:<br>
+          If the CDR  version does not match the yaml, then update the YAML file accordingly:<br>
+        ```         
+          apiVersion: monitoring.coreos.com/v1beta1   # or v1alpha1 if that's what step 1 showed
+          kind: AlertmanagerConfig
         ```
-        apiVersion: monitoring.coreos.com/v1beta1   # or v1alpha1 if that's what step 1 showed
-        kind: AlertmanagerConfig
 
       <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/19%20troubleshooting%20error%20CDR.PNG" width=800/> 
     </details>
@@ -245,18 +246,19 @@ Set up alerting rules and email notifications for application performance issues
 
 
 ## Testing Alert Manager
-20. Create a test pod to strees the system.
+20. Create a test pod to stress the system.
     ```bash
+    kubectl run cpu-stress-test --image=containerstack/cpustress -- cpu 4 --timeout 30s --metrics-brief
     ```
-    <img src="" width=800/>
+    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/commit/2ebb37754e3c5709c9de3b1b74ef43187fecf1b4" width=800/>
     
 21. Verify that the pods is running.
     ```
     kubectl get pods
     ```
-    <img src="" width=800/>
+    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/commit/2ebb37754e3c5709c9de3b1b74ef43187fecf1b4" width=800/>
     
-22. Check your email and confirm that the High CPU alert was triggered and received.
+22. Check your email and confirm that the High CPU alert was triggered and received:
 
     <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/commit/36086b57dc7192fac732a7308f953c7d93c5e789" width=800/>
     
