@@ -105,7 +105,7 @@ Set up alerting rules and email notifications for application performance issues
 8. Test the Crash Looping rule.
    ```bash
    ```
-   <img src="" width=800/>
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/9%20second%20alart.PNG" width=800/>
    
 9. Add the rule to the yaml file.
    
@@ -120,7 +120,7 @@ Set up alerting rules and email notifications for application performance issues
        description: "Pod {{ $labels.pod }} in namespace {{ $labels.namespace }} restarted = {{ $value}} times in 5m"
        summary: "Kubernetes Pod CrashLooping"
    ```
-   <img src="" width=800/>
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/CrshRule.PNG" width=800/>
    
 10. Apply the alert-rules.yaml file to the EKS cluster.
    ```bash
