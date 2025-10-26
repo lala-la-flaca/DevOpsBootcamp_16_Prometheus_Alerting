@@ -157,21 +157,22 @@ Set up alerting rules and email notifications for application performance issues
         
     <details><summary><strong>PrometheusAlert NOK: CDR Error</strong></summary>
       If it does not work, then ensure your CDR version APIversion is the same as your cluster.<br>
-        Verify if CDR are available in the cluster:
+        Verify if CDR are available in the cluster:<br>
+      
         ```
         kubectl get crd alertmanagerconfigs.monitoring.coreos.com
         ```
-        See which API versions the CRD serves (e.g., v1beta1 or v1alpha1):
+        See which API versions the CRD serves (e.g., v1beta1 or v1alpha1):<br>
         ```
         kubectl get crd alertmanagerconfigs.monitoring.coreos.com -o jsonpath='{.spec.versions[*].name}{"\n"}'
         ```
-        If the CDR  version does not match the yaml, then update the YAML file accordingly:
+        If the CDR  version does not match the yaml, then update the YAML file accordingly:<br>
         ```
         apiVersion: monitoring.coreos.com/v1beta1   # or v1alpha1 if that's what step 1 showed
         kind: AlertmanagerConfig
         ```
-        <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/19%20troubleshooting%20error%20CDR.PNG" width=800/> 
-      </details>
+      <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/19%20troubleshooting%20error%20CDR.PNG" width=800/> 
+    </details>
       
     ```bash
       apiVersion: monitoring.coreos.com/v1alpha1
@@ -198,10 +199,6 @@ Set up alerting rules and email notifications for application performance issues
 
 15. Add the email receivers to the YAML file.
     
-    <details><summary><strong>GMAIL APP PASSWORD</strong></summary>
-      Ensure you have two-step authentication activate and the secret is using the APP password for the app.
-    </details>
-    
     ```bash
        receivers:
             - name: 'email'
@@ -217,6 +214,9 @@ Set up alerting rules and email notifications for application performance issues
     ```
 
 16. Create a kubernetes secret to store email credentials.
+    <details><summary><strong>GMAIL APP PASSWORD</strong></summary>
+      Ensure you have two-step authentication activate and the secret is using the APP password for the app.
+    </details>
 
     ```bash
       apiVersion: v1
@@ -229,17 +229,17 @@ Set up alerting rules and email notifications for application performance issues
         password: your_password_base64_encoded
     ```
 
-17. Apply the secret.
+18. Apply the secret.
     ```
     kubectl apply -f email-secret.yaml
     ```
 
-18. Apply the alert-manager configurataton file
+19. Apply the alert-manager configurataton file
     ```
     kubectl apply -f alert-manager-config.yaml
     ```
     
-19. Verify the email receiver configuration in the AlertManeger Web UI
+20. Verify the email receiver configuration in the AlertManeger Web UI
     <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_16_Prometheus_Alerting/blob/main/Img/15%20alertmanagrer%20ocnfig.PNG" width=800/>
 
 
