@@ -32,7 +32,29 @@ Set up alerting rules and email notifications for application performance issues
 <img src=""/>
 
 # ⚙️ Project Configuration
-## Setup EKS Cluster
+## Access to Prometheus WebUT and AlertManager
+1. Verify the services created in the monitoring namespaces.
+   
+   ```bash
+   kubectl get services - monitoring
+   ```
+   <img src="" width=800/>
+   
+2. Use port forwarding to access Prometheus Web UI.
+   
+   ```bash
+   kubectl port-forward service/monitoring-kube-prometheus-prometheus 9090:9090  -n monitoring &
+   ```
+   <img src="" width=800/>
+   
+3. Use port forwarding to access AlertManager Web UI.
+   
+   ```bash
+    kubectl port-forward service/monitoring-kube-prometheus-alertmanager -n monitoring 9093:9093 &
+   ```
+   <img src="" width=800/>
+   
+   
 
    
 
